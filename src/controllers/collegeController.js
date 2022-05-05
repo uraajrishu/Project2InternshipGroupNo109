@@ -31,9 +31,18 @@ const createCollege = async function (req, res) {
             return}
 
         if (!isValid(requestBody.logoLink)) {
-            res.status(400).send({ status: false, message:"logo link is required"})
-            return}
+         res.status(400).send({ status: false, message:"logo link is required"})
+         return}               
 
+         //Logo validatation----->
+         function isValidURL(string) {
+         var res = string.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+         return (res !== null)};
+
+        if (!isValidURL(requestBody.logoLink)) {
+            res.status(400).send({ status: false, message:"logo url is not valid! Please Enter a valid url"})
+            return}
+            
         // unique validation  >---------
 
         let uniqueNameCheck = await collegeModel.findOne({name:requestBody.name})

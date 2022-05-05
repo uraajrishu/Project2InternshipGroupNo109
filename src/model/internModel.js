@@ -5,9 +5,9 @@ const internSchema = new mongoose.Schema({
 
       email:{ type:String, trim: true, unique: true, required:"EmailId is required"},
 
-      mobile:{ type:Number, unique: true, required:"Mobile Number is required"},
+      mobile:{ type:String, unique: true, required:"Mobile Number is required"},
 
-      collegeId:{ type: mongoose.Schema.Types.ObjectId, ref :"College", required:"College Id is required"},
+      collegeId:{ type: mongoose.Types.ObjectId, ref :"College", required:"College Id is required"},
 
       isDeleted:{ type:Boolean, default:false}
 
