@@ -1,24 +1,35 @@
 const internModel = require("../model/internModel")
 const collegeModel = require("../model/collegeModel")
+const validator = require('validator');
 
+//============================================================================>>
+const isValid = function (value) {
+    if (typeof value === 'undefined' || value === null) return false
+    if (typeof value === 'string' && value.trim().length === 0) return false
+    if (typeof value === 'number'  ) return false
+    return true;}
+
+const isValidRequestBody = function (requestBody) {
+    return Object.keys(requestBody).length > 0}
+//=======================>>
 
 const createIntern = async function(req, res){
     try{
         const requestBody = req.body
 
-        if(!requestBody){
+        if(!isValidRequestBody(requestBody)){
             res.status(400).send({status:false, msg:"Invalid intern request"})
         return}
 
-        if(!requestBody.name){
+        if(!isValid(requestBody.name)){
             res.status(400).send({status:false, msg:"Intern Name is required"})
         return}
 
-        if(!requestBody.email){
+        if(!isValid(requestBody.email)){
             res.status(400).send({status:false, msg:"Email is required"})
         return}
 
-        if(!requestBody.mobile){
+        if(!isValid(requestBody.mobile)){
             res.status(400).send({status:false, msg:"Mobile Number is required"})
         return}
          
