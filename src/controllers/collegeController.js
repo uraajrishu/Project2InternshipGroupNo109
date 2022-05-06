@@ -5,7 +5,6 @@ const internModel = require("../model/internModel")
 const isValid = function (value) {
     if (typeof value === 'undefined' || value === null) return false
     if (typeof value === 'string' && value.trim().length === 0) return false
-    if (typeof value === 'number') return false
     return true;}
 
 //validating request body ===========
@@ -54,7 +53,7 @@ const createCollege = async function (req, res) {
         return res.status(400).send({status:false,msg:"this full  name already exist"})}
 
         let collegeCreate = await collegeModel.create(requestBody)
-        res.status(201).send({ status: true, data: collegeCreate })
+        res.status(201).send({ status: true, data: requestBody })
 
     } catch (error) {
         console.log(error)
@@ -97,13 +96,3 @@ const collegeDetailsWithIntern = async function(req, res){
 
 module.exports.collegeDetailsWithIntern = collegeDetailsWithIntern
 module.exports.createCollege = createCollege;
-
-
-// Mandatory instructions to follow to get your Aws3 college logo link mandatory for all
-
-// 1. Only one submission is allowed. 
-// 2. Before submitting verify that your image is not corrupt and downloadable
-// 3. Abbreviation should be in lowercase. For example nitsurathkal as abbreviation and the image name should be nitsurathkal.jpeg 
-// NOTE The image name must be the same as the college abbreviation.
-// 4. There shouldn't be any space in between name of college for abbrevation and for images too. Only u can use - hyphen in between any 
-//two words example: chennai-university as abbrevation and chennai-university.png image name is CORRECT whereas chennai university.jpeg is WRONG
